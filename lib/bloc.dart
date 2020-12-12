@@ -1,31 +1,31 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
 
-import 'package:blocmediumblog/main.dart';
-//step 1
-class DemoBloc implements Bloc {
-  //StreamController of private type
-  final StreamController _apiController = StreamController<List>();
-  //getter for the stream
-  Stream get apiController => _apiController.stream;
-  //step 5
-  //1
-  getData() async {
-    ApiControllerJson apiControllerJson = ApiControllerJson();
-    List data = await apiControllerJson.fetchPost();
-    //2
-    if (data.length>20) data = data.sublist(0,25);
-    //3
-    _apiController.sink.add(data);
+void main() {
+  runApp(MyApp());
+}
 
-  }
-//step 2
+class MyApp extends StatelessWidget {
   @override
-  void dispose() {
-    // TODO: implement dispose
-    _apiController.close();
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomeScreen(),debugShowCheckedModeBanner: false,);
   }
 }
-//step 2
-abstract class Bloc {
-  void dispose();
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text("Flutter Widgets"),leading: FlutterLogo(),),
+        body: Container(
+          child: Center(child: Text("Welcome to flutter learning",style: TextStyle(fontWeight: FontWeight.bold),)),
+        ),
+      ),
+    );
+  }
 }
